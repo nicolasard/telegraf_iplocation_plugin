@@ -5,6 +5,10 @@ import com.ip2location.IPResult;
 
 import java.io.IOException;
 
+/**
+ * Service to get the location of an IP address. This Service
+ * make uses of the IP2Location library to get the location of an IP address.
+ */
 public class IpLocationService {
 
     private final String binaryFileLocation;
@@ -24,12 +28,10 @@ public class IpLocationService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        IPResult rec = null;
         try {
-            rec = loc.IPQuery(ip);
+            return loc.IPQuery(ip);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return rec;
     }
 }
