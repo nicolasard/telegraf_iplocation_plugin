@@ -14,8 +14,8 @@ public class IpLocationService {
     private final IP2Location loc = new IP2Location();
 
     public IpLocationService() {
-        this.binaryFileLocation = System.getenv().getOrDefault("IP2LOCATION_BINARY_FILE", "/opt/IP2LOCATION-LITE-DB9.IPV6.BIN");        this.loadInMemory = false;
-        this.loadInMemory = Boolean.parseBoolean(System.getenv().getOrDefault("IP2LOCATION_LOAD_IN_MEMORY", "false"));this.loadInMemory = Boolean.parseBoolean(System.getenv().getOrDefault("IP2LOCATION_LOAD_IN_MEMORY", "false"));private final boolean loadInMemory;
+        this.binaryFileLocation = System.getenv().getOrDefault("IP2LOCATION_BINARY_FILE", "/opt/IP2LOCATION-LITE-DB9.IPV6.BIN");
+        this.loadInMemory = Boolean.parseBoolean(System.getenv().getOrDefault("IP2LOCATION_LOAD_IN_MEMORY", "false"));
     }
 
     public IPResult getIpInformation(final String ip){
