@@ -29,7 +29,7 @@ public class LineProtocolTest {
         assertEquals("\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\"", fields.get("user_agent"));
         assertEquals("0", fields.get("response_time"));
         //Test we are able to build back the line
-        assertEquals(log, lineProtocol.build());
+        assertEquals(log, lineProtocol.serialize());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class LineProtocolTest {
         final String log = "weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200 user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0 1735396661095817863";
         final LineProtocol lineProtocol = LineProtocol.parse(log);
         lineProtocol.addTag("name","value");
-        assertEquals("weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200,name=value user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0 1735396661095817863",lineProtocol.build());
+        assertEquals("weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200,name=value user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0 1735396661095817863",lineProtocol.serialize());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class LineProtocolTest {
         final String log = "weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200 user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0 1735396661095817863";
         final LineProtocol lineProtocol = LineProtocol.parse(log);
         lineProtocol.addField("name","value");
-        assertEquals("weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200 user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0,name=value 1735396661095817863",lineProtocol.build());
+        assertEquals("weblogs,host=servus-apps,path=/opt/sanclementetulugar-web.log,remote_addr=18.231.0.100,server_name=sanclementetulugar.com,status=200 user_agent=\"synthetic-monitoring-agent/v0.30.0-0-g864dfd5bcefb (linux amd64; 864dfd5bcefb3f1e5b8c1f897e144af84813cd3a; 2024-12-17 09:18:16+00:00; +https://github.com/grafana/synthetic-monitoring-agent)\",response_time=0,name=value 1735396661095817863",lineProtocol.serialize());
     }
 
 }

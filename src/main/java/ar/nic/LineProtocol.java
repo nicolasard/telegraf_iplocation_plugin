@@ -54,7 +54,7 @@ public class LineProtocol {
         return parser;
     }
 
-    public String build(){
+    public String serialize(){
         StringBuilder sb = new StringBuilder(measurement);
         if (!tags.isEmpty()) {
             sb.append(",");

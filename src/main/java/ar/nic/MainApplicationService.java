@@ -5,7 +5,7 @@ import com.ip2location.IPResult;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import org.tinylog.Logger;
 
 public class MainApplicationService {
 
@@ -17,8 +17,7 @@ public class MainApplicationService {
             try{
                 writeLine(this.process(input));
             }catch (RuntimeException e){
-                System.out.println(e);
-                //TODO: Log exception somewhere
+                Logger.warn("Error processing the input: {}", e.getMessage(),e);
                 writeLine(input);
             }
         }
@@ -32,7 +31,7 @@ public class MainApplicationService {
         lineProtocol.addTag("city",ipResult.getCity().replace(" ", "-"));
         lineProtocol.addTag("latitude",getFormatedValue(ipResult.getLatitude()));
         lineProtocol.addTag("longitude",getFormatedValue(ipResult.getLongitude()));
-        return lineProtocol.build();
+        return lineProtocol.serialize();
     }
 
     private void writeLine(final String out){
